@@ -9,8 +9,11 @@ if len(testflight_id)==8:
 	url = "https://testflight.apple.com/join/" + testflight_id
 else:
 	url = testflight_id
+	
+cookies = {'geo': 'ES'}	
+
 while True:
-    site = requests.get(url)
+    site = requests.get(url, cookies=cookies)
     soup = BeautifulSoup(site.content,"html.parser")
     beta_status = soup.find("div",class_="beta-status").span.text
     if beta_status != "Esta versión beta está llena." or "This beta is full.":
