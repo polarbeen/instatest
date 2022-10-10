@@ -16,7 +16,7 @@ while True:
     site = requests.get(url, cookies=cookies)
     soup = BeautifulSoup(site.content,"html.parser")
     beta_status = soup.find("div",class_="beta-status").span.text
-    if beta_status != "Esta versión beta está llena." or "This beta is full.":
+    if beta_status != "Esta versión beta está llena.":
         BOT_URL = "https://api.telegram.org/bot{}/sendMessage".format(BOT_TOKEN)
         message = "You can finally join the beta. Hooooray. \b" + url
         requests.get(BOT_URL, params={"chat_id": CHAT_ID, "text": message,"parse_mode": "html", "disable_web_page_preview": "true"})
