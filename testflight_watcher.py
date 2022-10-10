@@ -9,14 +9,19 @@ if len(testflight_id)==8:
 	url = "https://testflight.apple.com/join/" + testflight_id
 else:
 	url = testflight_id
-	
-cookies = {'geo': 'ES'}	
-
 while True:
-    site = requests.get(url, cookies=cookies)
+    site = requests.get(url)
     soup = BeautifulSoup(site.content,"html.parser")
     beta_status = soup.find("div",class_="beta-status").span.text
-    if beta_status != "Esta versión beta está llena.":
+
+    if beta_status.startswith("T"):
+        beta_stat = "This beta is full."
+
+    elif beta_status.startswith("E"):
+        beta_stat = "Esta versión beta está llena."
+
+
+    if beta_status != beta_stat:
         BOT_URL = "https://api.telegram.org/bot{}/sendMessage".format(BOT_TOKEN)
         message = "You can finally join the beta. Hooooray. \b" + url
         requests.get(BOT_URL, params={"chat_id": CHAT_ID, "text": message,"parse_mode": "html", "disable_web_page_preview": "true"})
