@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from time import sleep
 
-testflight_id = "q1cg7IPl"
+testflight_id = "https://testflight.apple.com/join/q1cg7IPl"
 CHAT_ID = "-1001597696937" 
 BOT_TOKEN = "5397486870:AAEQ1AuaEfUeof9NIhrK4dRi5UWwzPNNmJI"
 if len(testflight_id)==8:
